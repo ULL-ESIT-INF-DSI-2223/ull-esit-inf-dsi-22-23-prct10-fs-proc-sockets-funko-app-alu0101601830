@@ -13,227 +13,32 @@
 <div class="tsd-page-title">
 <h2>doc-test</h2></div>
 <div class="tsd-panel tsd-typography">
-<a href="#práctica-9-funko-pop" id="práctica-9-funko-pop" style="color: inherit; text-decoration: none;">
-  <h1>Práctica 9: Funko Pop</h1>
+<a href="#práctica-10-sockets" id="práctica-10-sockets" style="color: inherit; text-decoration: none;">
+  <h1>Práctica 10: Sockets</h1>
 </a>
 
 <a href="#diego-wiederkehr-bruno-alu0101601830" id="diego-wiederkehr-bruno-alu0101601830" style="color: inherit; text-decoration: none;">
   <h5>Diego Wiederkehr Bruno, alu0101601830</h5>
 </a>
-<p><a href="https://coveralls.io/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct09-funko-app-alu0101601830?branch=main"><img src="https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct09-funko-app-alu0101601830/badge.svg?branch=main" alt="Coverage Status"></a></p>
 
 <a href="#el-github-pages-se-encuentra-en-el-siguiente-link" id="el-github-pages-se-encuentra-en-el-siguiente-link" style="color: inherit; text-decoration: none;">
-  <h3>El GitHub Pages se encuentra en el siguiente <a href="https://ull-esit-inf-dsi-2223.github.io/ull-esit-inf-dsi-22-23-prct09-funko-app-alu0101601830/">link</a>.</h3>
+  <h3>El GitHub Pages se encuentra en el siguiente <a href="https://ull-esit-inf-dsi-2223.github.io/ull-esit-inf-dsi-22-23-prct10-fs-proc-sockets-funko-app-alu0101601830/">link</a>.</h3>
 </a>
 
 <a href="#introducción" id="introducción" style="color: inherit; text-decoration: none;">
   <h2>Introducción</h2>
 </a>
-<p>En esta práctica debemos realizar un sistema de colección de Funko Pop para usuarios. Cada usuario tendrá una colección de Funkos con sus características donde podrán agregar más, eliminar, listar o mostrar información detallada sobre cada Funko. La aplicación será controlada por comandos y guardará la información sobre cada Funko en ficheros JSON. </p>
+<p>Info </p>
 
 <a href="#distribución-de-archivos" id="distribución-de-archivos" style="color: inherit; text-decoration: none;">
   <h2>Distribución de archivos</h2>
 </a>
-<p>En mi caso, he realizado tres archivos distintos, <strong>funko.ts</strong>, <strong>funkoOperations.ts</strong> y <strong>index.ts</strong>. En resumen, dentro de <strong>funko.ts</strong> tenemos la interfaz de como es un Funko y dos enumerados para el tipo y el género. En <strong>funkoOperations.ts</strong> tenemos todas las operaciones a realizar con los Funkos y finalmente en <strong>index.ts</strong> implementamos la interacción del usuario con la aplicación a través de los comandos.</p>
-
-<a href="#funkots" id="funkots" style="color: inherit; text-decoration: none;">
-  <h2>Funko.ts</h2>
-</a>
-<p>Primero he creado dos enums para Tipo y Genero:</p>
-<pre><code class="language-ts"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">enum</span><span class="hl-1"> </span><span class="hl-3">Tipo</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">Pop</span><span class="hl-1"> = </span><span class="hl-5">&#39;Pop!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">PopRides</span><span class="hl-1"> = </span><span class="hl-5">&#39;Pop! Rides&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">VinylSoda</span><span class="hl-1"> = </span><span class="hl-5">&#39;Vinyl Soda&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">VinylGold</span><span class="hl-1"> = </span><span class="hl-5">&#39;Vinyl Gold&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">}</span><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">enum</span><span class="hl-1"> </span><span class="hl-3">Genero</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">Animacion</span><span class="hl-1"> = </span><span class="hl-5">&#39;Animación&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">PeliculasTV</span><span class="hl-1"> = </span><span class="hl-5">&#39;Películas y TV&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">Videojuegos</span><span class="hl-1"> = </span><span class="hl-5">&#39;Videojuegos&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">Deportes</span><span class="hl-1"> = </span><span class="hl-5">&#39;Deportes&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">Musica</span><span class="hl-1"> = </span><span class="hl-5">&#39;Música&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-4">Anime</span><span class="hl-1"> = </span><span class="hl-5">&#39;Ánime&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">}</span>
-</code></pre>
-<p>Aqui tenemos los tipos de Funkos que pueden ser y sus Generos, si el usuario introduce un tipo o un genero que no está en el enumerado, la aplicación no lo dará por válido.
-La estructura de la interfaz de los Funkos es la siguiente:</p>
-<pre><code class="language-ts"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">interface</span><span class="hl-1"> </span><span class="hl-3">Funko</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">id</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">nombre</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">descripcion</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">tipo</span><span class="hl-1">: </span><span class="hl-3">Tipo</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">genero</span><span class="hl-1">: </span><span class="hl-3">Genero</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">franquicia</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">numero</span><span class="hl-1">: </span><span class="hl-3">number</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">exclusivo</span><span class="hl-1">: </span><span class="hl-3">boolean</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">caracteristicasEspeciales</span><span class="hl-1">: </span><span class="hl-3">string</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-6">valorDeMercado</span><span class="hl-1">: </span><span class="hl-3">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
-</code></pre>
-<p>Esta cuenta con las características que nos dan en el enunciado de la práctica.</p>
-
-<a href="#funkooperationsts" id="funkooperationsts" style="color: inherit; text-decoration: none;">
-  <h2>FunkoOperations.ts</h2>
-</a>
-<p>Aquí he creado una clase llamada <em>FunkoOperations</em> con dos variables, <code>funkos</code>: array de Funkos donde los cargo y los voy guardando y <code>userDirectory</code>: directorio del usuario introducido donde guardamos los ficheros JSON necesarios. Para el constructor, primero introduce el nombre del usuario y creo una carpeta <code>/users/</code> donde introduzco la carpeta necesaria o la leo del usuario correspondiente. En el mismo constructor llamo a la función <code>loadFunkos()</code> que es la encargada de cargar todos los Funkos de los ficheros JSON a la clase. Más tarde explico exactamente lo que hace. Funciones:</p>
-
-<a href="#addfunkofunko-funko-username-string" id="addfunkofunko-funko-username-string" style="color: inherit; text-decoration: none;">
-  <h3><code>addFunko(funko: Funko, username: string)</code>:</h3>
-</a>
-<p>En esta función compruebo primero si existe el Funko introducido, en caso de que exista pongo un mensaje en la consola que sea rojo con el paquete chalk y en caso de que no esté hago un push al array de funkos y pongo un mensaje en verde de que se ha añadido correctamente. Utilizo la función <code>saveFunko()</code> que explicaré mas tarde pero básicamente sirve para guardar un Funko en un archivo JSON.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">existingFunko</span><span class="hl-1"> = </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">findFunko</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1">);</span><br/><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">existingFunko</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-5">`Funko already exists at </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">} </span><span class="hl-0">else</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">push</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">saveFunko</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`New Funko added to </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span>
-</code></pre>
-
-<a href="#updatefunkoupdatedfunko-funko-username-string" id="updatefunkoupdatedfunko-funko-username-string" style="color: inherit; text-decoration: none;">
-  <h3><code>updateFunko(updatedFunko: Funko, username: string)</code>:</h3>
-</a>
-<p>Primero busco el Funko introducido y me aseguro de que exista, en caso de que no exista, dejo un mensaje en la consola. Si existe, utilizo la función <code>saveFunko()</code> para guardar el Funko en el JSON y en el array de Funkos, modifico el correspondiente.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">index</span><span class="hl-1"> = </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">findIndex</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1"> </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-6">funko</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1"> === </span><span class="hl-6">updatedFunko</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1">);</span><br/><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">index</span><span class="hl-1"> !== -</span><span class="hl-8">1</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">[</span><span class="hl-6">index</span><span class="hl-1">] = </span><span class="hl-6">updatedFunko</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">saveFunko</span><span class="hl-1">(</span><span class="hl-6">updatedFunko</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Funko updated at </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">} </span><span class="hl-0">else</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-5">`Funko not found at </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span>
-</code></pre>
-
-<a href="#deletefunkoid-string-username-string" id="deletefunkoid-string-username-string" style="color: inherit; text-decoration: none;">
-  <h3><code>deleteFunko(id: string, username: string)</code>:</h3>
-</a>
-<p>Al igual que las otras funciones, primero busca si existe y en caso de que exista utiliza <em>splice</em> para el array de Funkos y llama a <code>deleteFunkoFile()</code> para eliminar el el fichero donde está guardado el Funko introducido.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">index</span><span class="hl-1"> = </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">findIndex</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1"> </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-6">funko</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1"> === </span><span class="hl-6">id</span><span class="hl-1">);</span><br/><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">index</span><span class="hl-1"> !== -</span><span class="hl-8">1</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">splice</span><span class="hl-1">(</span><span class="hl-6">index</span><span class="hl-1">, </span><span class="hl-8">1</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">deleteFunkoFile</span><span class="hl-1">(</span><span class="hl-6">id</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Funko removed from </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">} </span><span class="hl-0">else</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-5">`Funko not found at </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">}</span>
-</code></pre>
-
-<a href="#findfunkofunkoid-string" id="findfunkofunkoid-string" style="color: inherit; text-decoration: none;">
-  <h3><code>findFunko(funkoId: string)</code>:</h3>
-</a>
-<p>Esta función lo único que hace es devolver el Funko correspondiente al introducir un id, si el Funko no existe, devuelve undefined.</p>
-<pre><code class="language-ts"><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">find</span><span class="hl-1">((</span><span class="hl-6">funko</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-6">funko</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1"> === </span><span class="hl-6">funkoId</span><span class="hl-1">);</span>
-</code></pre>
-
-<a href="#listfunkosusername-string" id="listfunkosusername-string" style="color: inherit; text-decoration: none;">
-  <h3><code>listFunkos(username: string)</code>:</h3>
-</a>
-<p>Esta función se encarga de listar todos los Funkos recorriendo el array de Funkos y llamando a la función <code>printFunkoInfo()</code>.</p>
-<pre><code class="language-ts"><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-6">length</span><span class="hl-1"> === </span><span class="hl-8">0</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-5">`No Funkos in the list of </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-0">return</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">blue</span><span class="hl-1">(</span><span class="hl-5">`----------------------------------`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">blue</span><span class="hl-1">(</span><span class="hl-5">`</span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> Funko Pop Collection`</span><span class="hl-1">));</span><br/><span class="hl-0">for</span><span class="hl-1"> (</span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">funko</span><span class="hl-1"> </span><span class="hl-2">of</span><span class="hl-1"> </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">printFunkoInfo</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span><br/><span class="hl-1">}</span>
-</code></pre>
-
-<a href="#getfunkobyidid-string-username-string" id="getfunkobyidid-string-username-string" style="color: inherit; text-decoration: none;">
-  <h3><code>getFunkoById(id: string, username: string)</code>:</h3>
-</a>
-<p>Esta función devuelve la información detallada de un Funko que el usuario mete manualmente. Simplemente busca el Funko para comprobar que existe y llama a la función <code>printFunkoInfo()</code> para mostrar en consola la información.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">funko</span><span class="hl-1"> = </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">find</span><span class="hl-1">(</span><span class="hl-6">f</span><span class="hl-1"> </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-6">f</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1"> === </span><span class="hl-6">id</span><span class="hl-1">);</span><br/><span class="hl-0">if</span><span class="hl-1"> (!</span><span class="hl-6">funko</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">red</span><span class="hl-1">(</span><span class="hl-5">`Funko not found at </span><span class="hl-2">${</span><span class="hl-6">username</span><span class="hl-2">}</span><span class="hl-5"> collection!`</span><span class="hl-1">));</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">printFunkoInfo</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span>
-</code></pre>
-
-<a href="#printfunkoinfofunko-funko" id="printfunkoinfofunko-funko" style="color: inherit; text-decoration: none;">
-  <h3><code>printFunkoInfo(funko: Funko)</code>:</h3>
-</a>
-<p>Esta función imprime cada detalle del Funko, utilizo el paquete chalk para imprimir con distintos colores.</p>
-<pre><code class="language-ts"><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">blue</span><span class="hl-1">(</span><span class="hl-5">`----------------------------------`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`ID: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">id</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Name: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">nombre</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Description: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">descripcion</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Type: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">tipo</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Genre: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">genero</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Franchise: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">franquicia</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Number: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">numero</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Exclusive: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">exclusivo</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Special Features: </span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">caracteristicasEspeciales</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-7">green</span><span class="hl-1">(</span><span class="hl-5">`Merch value: `</span><span class="hl-1">) + </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-7">getMarketValueColor</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">.</span><span class="hl-6">valorDeMercado</span><span class="hl-1">)(</span><span class="hl-5">`</span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">valorDeMercado</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">));</span>
-</code></pre>
-
-<a href="#getmarketvaluecolorvalue-number" id="getmarketvaluecolorvalue-number" style="color: inherit; text-decoration: none;">
-  <h3><code>getMarketValueColor(value: number)</code>:</h3>
-</a>
-<p>Esta función sirve para devolver el color necesario dependiendo del valor del Funko, en mi caso si es menor que 20 imprimo con color rojo, si está entre 20 y 30 imprimo en color azul, si es entre 30 y 50 imprimo en color amarillo y si es mayor que 50 imprimo en color verde.</p>
-<pre><code class="language-ts"><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1"> &lt; </span><span class="hl-8">20</span><span class="hl-1">){</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-6">red</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><span class="hl-0">else</span><span class="hl-1"> </span><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1"> &gt;= </span><span class="hl-8">20</span><span class="hl-1"> &amp;&amp; </span><span class="hl-6">value</span><span class="hl-1"> &lt; </span><span class="hl-8">30</span><span class="hl-1">){</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-6">blue</span><span class="hl-1">;</span><br/><span class="hl-1">} </span><span class="hl-0">else</span><span class="hl-1"> </span><span class="hl-0">if</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1"> &gt;= </span><span class="hl-8">30</span><span class="hl-1"> &amp;&amp; </span><span class="hl-6">value</span><span class="hl-1"> &lt; </span><span class="hl-8">50</span><span class="hl-1">){</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-6">yellow</span><span class="hl-1">;</span><br/><span class="hl-1">} </span><span class="hl-0">else</span><span class="hl-1">{</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-6">chalk</span><span class="hl-1">.</span><span class="hl-6">green</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
-</code></pre>
-
-<a href="#loadfunkos" id="loadfunkos" style="color: inherit; text-decoration: none;">
-  <h3><code>loadFunkos()</code>:</h3>
-</a>
-<p>Esta función carga los Funkos de un usuario y los introduce uno por uno en el array de Funkos de la clase.</p>
-<pre><code class="language-ts"><span class="hl-0">if</span><span class="hl-1"> (!</span><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">existsSync</span><span class="hl-1">(</span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">userDirectory</span><span class="hl-1">)) {</span><br/><span class="hl-1">    </span><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">mkdirSync</span><span class="hl-1">(</span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">userDirectory</span><span class="hl-1">);</span><br/><span class="hl-1">}</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">files</span><span class="hl-1"> = </span><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">readdirSync</span><span class="hl-1">(</span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">userDirectory</span><span class="hl-1">);</span><br/><span class="hl-6">files</span><span class="hl-1">.</span><span class="hl-7">forEach</span><span class="hl-1">((</span><span class="hl-6">file</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">content</span><span class="hl-1"> = </span><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">readFileSync</span><span class="hl-1">(</span><span class="hl-5">`</span><span class="hl-2">${</span><span class="hl-2">this</span><span class="hl-9">.</span><span class="hl-6">userDirectory</span><span class="hl-2">}</span><span class="hl-5">/</span><span class="hl-2">${</span><span class="hl-6">file</span><span class="hl-2">}</span><span class="hl-5">`</span><span class="hl-1">, </span><span class="hl-5">&#39;utf-8&#39;</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">funko</span><span class="hl-1">: </span><span class="hl-3">Funko</span><span class="hl-1"> = </span><span class="hl-4">JSON</span><span class="hl-1">.</span><span class="hl-7">parse</span><span class="hl-1">(</span><span class="hl-6">content</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-2">this</span><span class="hl-1">.</span><span class="hl-6">funkos</span><span class="hl-1">.</span><span class="hl-7">push</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span><br/><span class="hl-1">});</span>
-</code></pre>
-
-<a href="#savefunkofunko-funko" id="savefunkofunko-funko" style="color: inherit; text-decoration: none;">
-  <h3><code>saveFunko(funko: Funko)</code>:</h3>
-</a>
-<p>Esta función escribe la información de un Funko en concreto en su fichero correspondiente utilizando fs.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">filePath</span><span class="hl-1"> = </span><span class="hl-5">`</span><span class="hl-2">${</span><span class="hl-2">this</span><span class="hl-9">.</span><span class="hl-6">userDirectory</span><span class="hl-2">}</span><span class="hl-5">/</span><span class="hl-2">${</span><span class="hl-6">funko</span><span class="hl-9">.</span><span class="hl-6">id</span><span class="hl-2">}</span><span class="hl-5">.json`</span><span class="hl-1">;</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">content</span><span class="hl-1"> = </span><span class="hl-4">JSON</span><span class="hl-1">.</span><span class="hl-7">stringify</span><span class="hl-1">(</span><span class="hl-6">funko</span><span class="hl-1">);</span><br/><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">writeFileSync</span><span class="hl-1">(</span><span class="hl-6">filePath</span><span class="hl-1">, </span><span class="hl-6">content</span><span class="hl-1">);</span>
-</code></pre>
-
-<a href="#deletefunkofilefunkoid-string" id="deletefunkofilefunkoid-string" style="color: inherit; text-decoration: none;">
-  <h3><code>deleteFunkoFile(funkoId: string)</code>:</h3>
-</a>
-<p>Esta función elimina el fichero del Funko introducido utilizando fs.</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">filePath</span><span class="hl-1"> = </span><span class="hl-5">`</span><span class="hl-2">${</span><span class="hl-2">this</span><span class="hl-9">.</span><span class="hl-6">userDirectory</span><span class="hl-2">}</span><span class="hl-5">/</span><span class="hl-2">${</span><span class="hl-6">funkoId</span><span class="hl-2">}</span><span class="hl-5">.json`</span><span class="hl-1">;</span><br/><span class="hl-6">fs</span><span class="hl-1">.</span><span class="hl-7">unlinkSync</span><span class="hl-1">(</span><span class="hl-6">filePath</span><span class="hl-1">);</span>
-</code></pre>
-
-<a href="#indexts" id="indexts" style="color: inherit; text-decoration: none;">
-  <h2>Index.ts</h2>
-</a>
-<p>Este fichero utiliza el paquete yargs para leer los comandos introducidos por el usuario en la consola. Yo he creado 5 comandos: add, remove, list, read, update. Todos los he realizado de la misma forma asi que voy a explicar el funcionamiento por ejemplo de remove para ver como funciona:</p>
-<pre><code class="language-ts"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">argv</span><span class="hl-1"> = </span><span class="hl-7">yargs</span><span class="hl-1">(</span><span class="hl-7">hideBin</span><span class="hl-1">(</span><span class="hl-6">process</span><span class="hl-1">.</span><span class="hl-6">argv</span><span class="hl-1">))</span><br/><span class="hl-1">.</span><span class="hl-7">command</span><span class="hl-1">(</span><br/><span class="hl-1">  </span><span class="hl-5">&#39;remove&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">&#39;Eliminar un Funko&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  (</span><span class="hl-6">yargs</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-6">yargs</span><br/><span class="hl-1">    .</span><span class="hl-7">option</span><span class="hl-1">(</span><span class="hl-5">&#39;user&#39;</span><span class="hl-1">, { </span><span class="hl-6">describe:</span><span class="hl-1"> </span><span class="hl-5">&#39;Nombre de usuario&#39;</span><span class="hl-1">, </span><span class="hl-6">type:</span><span class="hl-1"> </span><span class="hl-5">&#39;string&#39;</span><span class="hl-1">, </span><span class="hl-6">demandOption:</span><span class="hl-1"> </span><span class="hl-2">true</span><span class="hl-1"> })</span><br/><span class="hl-1">    .</span><span class="hl-7">option</span><span class="hl-1">(</span><span class="hl-5">&#39;id&#39;</span><span class="hl-1">, { </span><span class="hl-6">describe:</span><span class="hl-1"> </span><span class="hl-5">&#39;ID del Funko&#39;</span><span class="hl-1">, </span><span class="hl-6">type:</span><span class="hl-1"> </span><span class="hl-5">&#39;string&#39;</span><span class="hl-1">, </span><span class="hl-6">demandOption:</span><span class="hl-1"> </span><span class="hl-2">true</span><span class="hl-1"> })</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">  (</span><span class="hl-6">argv</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-4">funkoOperations</span><span class="hl-1"> = </span><span class="hl-2">new</span><span class="hl-1"> </span><span class="hl-7">FunkoOperations</span><span class="hl-1">(</span><span class="hl-6">argv</span><span class="hl-1">.</span><span class="hl-6">user</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-6">funkoOperations</span><span class="hl-1">.</span><span class="hl-7">deleteFunko</span><span class="hl-1">(</span><span class="hl-6">argv</span><span class="hl-1">.</span><span class="hl-6">id</span><span class="hl-1">, </span><span class="hl-6">argv</span><span class="hl-1">.</span><span class="hl-6">user</span><span class="hl-1">)</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">)</span>
-</code></pre>
-<p>Primero introduzco el nombre del comando y una pequeña descripción, después voy leyendo todas las variables y les pongo la opción de <code>demandOption: true</code> para que sea obligatorio introducir esas variables. En este caso las variables son el nombre del usuario y el id del Funko a eliminar. Después en argv creo un nuevo objeto <code>FunkoOperations</code> con el argumento del usuario introducido y aplico la operación correspondiente, en este caso <code>deleteFunko</code> con el id introducido y el usuario introducido: (argv.id, argv.user)</p>
-
-<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
-  <h2>Tests</h2>
-</a>
-<p>Todos los GitHub Actions me dan sin error:</p>
-<p align="center">
-    <img width="674" alt="image" src="https://user-images.githubusercontent.com/117380181/229515055-bac636e5-c0dc-483c-a025-8220ff616d04.png">
-</p>
-
-
-<p>Los tests se han realizado con Mocha Chai y sus resultados son los siguientes:</p>
-<p align="center">
-    <img width="583" alt="image" src="https://user-images.githubusercontent.com/117380181/229515327-076fca69-3e33-4e6c-8165-bfb4b36cc487.png">
-</p>
-
-
-<p>Los resultados del Coverall son los siguientes:</p>
-<p align="center">
-    <img width="491" alt="image" src="https://user-images.githubusercontent.com/117380181/229515584-508c4602-f8be-4ba4-b9d5-4498b5153d7c.png">
-</p>
-
-<p>No está todo el código cubierto pero hay mucha parte de los JSON que no se como tratarlo o sobre errores en pantalla.</p>
-
-<a href="#ejemplos-de-ejecución" id="ejemplos-de-ejecución" style="color: inherit; text-decoration: none;">
-  <h2>Ejemplos de ejecución</h2>
-</a>
-<p><strong>Añado un Funko</strong></p>
-<p align="center">
-    <img width="719" alt="1" src="https://user-images.githubusercontent.com/117380181/229497092-43fb8f8a-bcc3-4c8d-b82b-edfae2e26921.png">
-</p>
-
-
-<p><strong>Añado el mismo Funko</strong></p>
-<p align="center">
-    <img width="722" alt="2" src="https://user-images.githubusercontent.com/117380181/229497119-af77511b-f03c-4aea-ac22-9e9b8bd96bf0.png">
-</p>
-
-
-<p><strong>Añado otro Funko</strong></p>
-<p align="center">
-    <img width="728" alt="3" src="https://user-images.githubusercontent.com/117380181/229497156-f85a571b-4479-4d8b-bcca-20227b6b344c.png">
-</p>
-
-
-<p><strong>Imprimo todos los Funkos del usuario</strong></p>
-<p align="center">
-    <img width="724" alt="4" src="https://user-images.githubusercontent.com/117380181/229497184-55593b6b-b5ee-4610-887e-80c38d6857fc.png">
-</p>
-
-
-<p><strong>Modifico el primer Funko</strong></p>
-<p align="center">
-    <img width="723" alt="5" src="https://user-images.githubusercontent.com/117380181/229497211-34aab8e2-6a9d-4b8c-bc79-f33612206eb9.png">
-</p>
-
-
-<p><strong>Imprimo toda la información de nuevo para ver la modificación</strong></p>
-<p align="center">
-    <img width="723" alt="6" src="https://user-images.githubusercontent.com/117380181/229497244-b97e456e-2b6e-4a41-ac87-3f4eb0286220.png">
-</p>
-
-
-<p><strong>Muestro la información del primer Funko</strong></p>
-<p align="center">
-    <img width="722" alt="7" src="https://user-images.githubusercontent.com/117380181/229497267-08f32d96-d94d-4e73-8476-9871e4c9815a.png">
-</p>
-
-
-<p><strong>Muestro la información de un Funko que no existe</strong></p>
-<p align="center">
-    <img width="725" alt="8" src="https://user-images.githubusercontent.com/117380181/229497291-d3cb94d1-c7b6-48c4-8aa3-c35ddacce70a.png">
-</p>
-
-
-<p><strong>Elimino el primer Funko</strong></p>
-<p align="center">
-    <img width="722" alt="9" src="https://user-images.githubusercontent.com/117380181/229497313-43ef5072-0017-46ae-a597-997f272b5882.png">
-</p>
-
-
-<p><strong>Intento eliminar un Funko que no existe</strong></p>
-<p align="center">
-    <img width="720" alt="10" src="https://user-images.githubusercontent.com/117380181/229497339-5b1e98ea-0c27-40e7-8c4c-f79e0648139c.png">
-</p>
-
-
-<p><strong>Muestro todos los Funkos para ver si se han eliminado</strong></p>
-<p align="center">
-    <img width="719" alt="11" src="https://user-images.githubusercontent.com/117380181/229497368-f0ad1882-c70a-4dfd-98f9-c53af1813573.png">
-</p>
-
-
+<p>Distribucion</p>
 
 <a href="#conclusión" id="conclusión" style="color: inherit; text-decoration: none;">
   <h2>Conclusión</h2>
 </a>
-<p>En esta práctica he aprendido como utilizar bien el paquete yargs y todas sus posibilidades para ejecutar comandos por pantalla, también he aprendido sobre el paquete chalk que puedes poner colores a los mensajes y he mejorado con la lectura de archivos y ficheros de tipo por ejemplo JSON.</p>
+<p>Conclusion</p>
 </div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
@@ -256,7 +61,6 @@ La estructura de la interfaz de los Funkos es la siguiente:</p>
 <ul>
 <li class="current selected"><a href="modules.html">doc-<wbr/>test</a>
 <ul>
-<li class="tsd-kind-module"><a href="modules/Mochila.html">Mochila</a></li>
 <li class="tsd-kind-module"><a href="modules/funko.html">funko</a></li>
 <li class="tsd-kind-module"><a href="modules/funkoOperations.html">funko<wbr/>Operations</a></li>
 <li class="tsd-kind-module"><a href="modules/index.html">index</a></li></ul></li></ul></div></details></nav></div></div>
