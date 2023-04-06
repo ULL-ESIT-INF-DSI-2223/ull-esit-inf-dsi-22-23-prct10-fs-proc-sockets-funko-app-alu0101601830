@@ -2,7 +2,8 @@
   "entryPoints": [
     "./src/funko.ts",
     "./src/funkoOperations.ts",
-    "./src/index.ts"
+    "./src/index.ts",
+    "./src/ejercicio-2.ts"
 
   ],
   "out": "./docs"
