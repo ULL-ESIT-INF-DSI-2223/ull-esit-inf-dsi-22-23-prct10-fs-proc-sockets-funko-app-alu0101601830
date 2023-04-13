@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/ejercicio-2.js\"",
     "server": "tsc-watch --onSuccess \"node dist/servidor.js\"",
-    "servidor": "tsc-watch --onSuccess \"node dist/PE103/server.js\"",
+    "client": "tsc-watch --onSuccess \"node dist/cliente.js\"",
     "doc": "typedoc",
     "test": "mocha",
     "coverage": "c8 npm test && c8 report --reporter=lcov"

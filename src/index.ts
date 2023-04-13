@@ -1,4 +1,4 @@
-import net from 'net';
+/*import net from 'net';
 import chalk from 'chalk';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -215,4 +215,4 @@ function isValidCommand(command: string): command is 'add' | 'list' | 'update' |
 }
 
 main();
-
+*/

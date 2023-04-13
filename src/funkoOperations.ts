@@ -24,14 +24,14 @@ export class FunkoOperations {
      * @param funko - Funko a añadir
      * @param username - Nombre del usuario
      */
-    public addFunko(funko: Funko, username: string): void {
+    public addFunko(funko: Funko, username: string): boolean {
         const existingFunko = this.findFunko(funko.id);
         if (existingFunko) {
-            console.log(chalk.red(`Funko already exists at ${username} collection!`));
+            return false;
         } else {
             this.funkos.push(funko);
             this.saveFunko(funko);
-            console.log(chalk.green(`New Funko added to ${username} collection!`));
+            return true;
         }
     }
 
@@ -40,14 +40,14 @@ export class FunkoOperations {
      * @param updatedFunko - Funko con la información actualizada
      * @param username - nombre del usuario
      */
-    public updateFunko(updatedFunko: Funko, username: string): void {
+    public updateFunko(updatedFunko: Funko, username: string): boolean {
         const index = this.funkos.findIndex(funko => funko.id === updatedFunko.id);
         if (index !== -1) {
             this.funkos[index] = updatedFunko;
             this.saveFunko(updatedFunko);
-            console.log(chalk.green(`Funko updated at ${username} collection!`));
+            return true;
         } else {
-            console.log(chalk.red(`Funko not found at ${username} collection!`));
+            return false;
         }
     }
 
@@ -56,14 +56,14 @@ export class FunkoOperations {
      * @param id - id del Funko que se quiere eliminar
      * @param username - nombre del usuario
      */
-    public deleteFunko(id: string, username: string): void {
+    public deleteFunko(id: string, username: string): boolean {
         const index = this.funkos.findIndex(funko => funko.id === id);
         if (index !== -1) {
             this.funkos.splice(index, 1);
             this.deleteFunkoFile(id);
-            console.log(chalk.green(`Funko removed from ${username} collection!`));
+            return true;
         } else {
-            console.log(chalk.red(`Funko not found at ${username} collection!`));
+            return false;
         }
     }
 
@@ -81,16 +81,18 @@ export class FunkoOperations {
      * @param username - nombre del usuario 
      * @returns Devuelve la información de todos los Funkos del usuario
      */
-    public listFunkos(username: string): void {
+    public listFunkos(username: string): string {
         if (this.funkos.length === 0) {
             console.log(chalk.red(`No Funkos in the list of ${username}`));
-            return;
+            return "Error";
         }
-        console.log(chalk.blue(`----------------------------------`));
-        console.log(chalk.blue(`${username} Funko Pop Collection`));
+        let result = `----------------------------------\n`+
+        `${username} Funko Pop Collection\n`
+
         for (const funko of this.funkos) {
-            this.printFunkoInfo(funko);
+            result += this.toString(funko);
         }
+        return result;
     }
 
     /**
@@ -99,13 +101,26 @@ export class FunkoOperations {
      * @param username - nombre del usuario
      * @returns returnea para hacer un break en caso de que no encuentre el Funko
      */
-    public getFunkoById(id: string, username: string): void {
+    public getFunkoById(id: string, username: string): string {
         const funko = this.funkos.find(f => f.id === id);
         if (!funko) {
-            console.log(chalk.red(`Funko not found at ${username} collection!`));
-            return;
+            return "Error";
         }
-        this.printFunkoInfo(funko);
+        return this.toString(funko);
+    }
+
+    public toString(funko: Funko): string{
+        return '-----------------------\n' + 
+        `ID: ${funko.id}\n`+
+        `Name: ${funko.nombre}\n` +
+        `Description: ${funko.descripcion}\n`+
+        `Type: ${funko.tipo}\n`+
+        `Genre: ${funko.genero}\n`+
+        `Franchise: ${funko.franquicia}\n`+
+        `Number: ${funko.numero}\n`+
+        `Exclusive: ${funko.exclusivo}\n`+
+        `Special Features: ${funko.caracteristicasEspeciales}\n`+
+        `Merch value: ` + this.getMarketValueColor(funko.valorDeMercado)(`${funko.valorDeMercado}\n`);
     }
 
     /**
