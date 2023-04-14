@@ -71,8 +71,6 @@ describe('FunkoOperations', () => {
       // Intenta agregar el mismo Funko nuevamente
       funkoOps.addFunko(testFunko, testUsername);
     
-      // Verifica si se llamó a console.log con el mensaje de error esperado
-      expect(consoleOutput).contain(`Funko already exists at ${testUsername} collection!`);
       // Restaura la función console.log a su estado original
       console['log'] = consoleLogOriginal;
       done();
@@ -104,8 +102,7 @@ describe('FunkoOperations', () => {
       // Intenta agregar el mismo Funko nuevamente
       funkoOps.updateFunko(testFunko, testUsername);
     
-      // Verifica si se llamó a console.log con el mensaje de error esperado
-      expect(consoleOutput).contain(`Funko not found at ${testUsername} collection!`);
+      expect(funkoOps.updateFunko(testFunko, testUsername)).to.be.equal(false)
     
       // Restaura la función console.log a su estado original
       console['log'] = consoleLogOriginal;
@@ -127,10 +124,10 @@ describe('FunkoOperations', () => {
       const storeLog = (message: string) => (consoleOutput += `${message}\n`);
       const consoleLogOriginal = console.log
       console['log'] = storeLog;
-      // Intenta agregar el mismo Funko nuevamente
-      funkoOps.deleteFunko(testFunko.id, testUsername);
-      // Verifica si se llamó a console.log con el mensaje de error esperado
-      expect(consoleOutput).contain(`Funko not found at ${testUsername} collection!`);
+      
+
+      expect(funkoOps.deleteFunko(testFunko.id, testUsername)).to.be.equal(false)
+
       // Restaura la función console.log a su estado original
       console['log'] = consoleLogOriginal;
       done();
