@@ -255,33 +255,35 @@ server.listen(SERVER_PORT, SERVER_HOST, () => {
 ## Tests y GitHub Actions
 Todos los GitHub Actions me dan sin error:
 <p align="center">
-
+<img width="656" alt="github actions" src="https://user-images.githubusercontent.com/117380181/232135539-9178a77b-fdf8-4eba-9ede-ac256e8b18d0.png">
 </p>
 Los tests se han realizado con Mocha Chai y sus resultados son los siguientes:
 <p align="center">
-
+<img width="548" alt="tests" src="https://user-images.githubusercontent.com/117380181/232135583-60bcb930-1a61-449d-9049-09792f171b44.png">
 </p>
 Los resultados del Coverall son los siguientes:
 <p align="center">
+<img width="464" alt="coverage" src="https://user-images.githubusercontent.com/117380181/232135637-8d074c63-585a-4739-8d41-9dd11a3cdc13.png">
 
 </p>
 No está todo el código cubierto pero hay mucha parte de los JSON que no se como tratarlo o sobre errores en pantalla.
+
 ## Ejemplos de ejecución
 **Añado un Funko**
 <p align="center">
-
+<img width="659" alt="Añadir funko" src="https://user-images.githubusercontent.com/117380181/232135665-7986888b-29bf-4877-a581-9005597f5596.png">
 </p>
 **Añado el mismo Funko**
 <p align="center">
-
+<img width="657" alt="añado mismo funko" src="https://user-images.githubusercontent.com/117380181/232135739-9874101a-dda2-4ea1-934b-fc33ca30ee7a.png">
 </p>
 **Muestro la información del primer Funko**
 <p align="center">
-
+<img width="652" alt="leer funko" src="https://user-images.githubusercontent.com/117380181/232135783-e35ec170-da7e-4cc8-8011-da33d14d8b19.png">
 </p>
 **Elimino el primer Funko**
 <p align="center">
-
+<img width="656" alt="eliminar funko" src="https://user-images.githubusercontent.com/117380181/232135804-6338c464-b71a-45ee-bfd2-be35757ef64d.png">
 </p>
 
 ## Conclusión
